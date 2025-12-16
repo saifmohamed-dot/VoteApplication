@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: worker-deployment
+  namespace: backend-ns
+  labels:
+    app: worker-dotnet
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: worker-dotnet
+  template:
+    metadata:
+      labels:
+        app: worker-dotnet
+    spec:
+      containers:
+        - name: worker-dotnet
+          image: saifmohamed123/worker-net:latest
+          imagePullPolicy: Always

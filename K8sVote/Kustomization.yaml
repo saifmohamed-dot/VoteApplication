@@ -1,0 +1,13 @@
+resources:
+  - app-namespaces.yaml
+  - postgres-secrets.yaml
+  - postgres-pvc.yaml
+  - cross-ns-forwarding.yaml
+  - postgres-deployment.yaml
+  - redis-deployment.yaml
+  - worker-deployment.yaml
+  - result-deployment.yaml
+  - vote-deployment.yaml
+  - vote-ingress.yaml
+  - redis-network-policy.yaml
+  - postgres-network-policy.yaml

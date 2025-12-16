@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: vote
+  namespace: frontend-ns
+  labels:
+    app: vote-app
+
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: vote-app
+  template:
+    metadata:
+      labels:
+        app: vote-app
+    spec:
+      containers:
+        - name: vote-app
+          image: saifmohamed123/vote-flask:latest
+          ports:
+            - containerPort: 80
+          imagePullPolicy: Always
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: vote-flask
+  namespace: frontend-ns
+spec:
+  selector:
+    app: vote-app
+  ports:
+    - protocol: TCP
+      port: 8080 # the service port (inside the cluster)
+      targetPort: 80 # vate-flask container port .
