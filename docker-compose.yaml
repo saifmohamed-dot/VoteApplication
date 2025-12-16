@@ -1,0 +1,51 @@
+services:
+  # vote service 
+  vote:
+    build: ./vote/
+    ports:
+      - "5050:80"
+    networks:
+      - generalnetwork
+    depends_on:
+      - redis
+  # result service 
+  result:
+    build: ./result/
+    ports:
+      - "8081:4000"
+    networks:
+      - generalnetwork
+    depends_on:
+      - db
+  # worker service 
+  worker:
+    build: ./worker/
+    networks:
+      - generalnetwork
+    depends_on:
+      - db
+      - redis
+  db:
+    image: postgres
+    restart: always
+    hostname: db
+    shm_size: 128mb
+    # or set shared memory limit when deploy via swarm stack
+    volumes:
+      - type: tmpfs
+        target: /dev/shm
+        tmpfs:
+          size: 134217728 # 128*2^20 bytes = 128Mb
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    networks:
+      - generalnetwork
+  # redis used here as a queueing service .
+  redis:
+    image: redis
+    hostname: redis
+    networks:
+      - generalnetwork
+networks:
+  generalnetwork:
