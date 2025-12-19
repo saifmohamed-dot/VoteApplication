@@ -11,3 +11,5 @@ resources:
   - vote-ingress.yaml
   - redis-network-policy.yaml
   - postgres-network-policy.yaml
+  - https://docs.projectcalico.org/manifests/calico.yaml
+  - https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.14.0/deploy/static/provider/kind/deploy.yaml
