@@ -1,0 +1,45 @@
+name: Worker CI/CD
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "worker/**/*.csproj"
+      - "worker/**/*.cs"
+      - "worker/Dockerfile"
+jobs:
+  worker-build-push-deploy:
+    runs-on: self-hosted
+
+    steps:
+      # host runner repo clone 
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      # docker login 
+      - name: docker hub try logging
+        run: docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{secrets.DOCKERHUB_TOKEN}}
+      # build the worker image 
+      - name: Worker image build
+        run: docker build \
+          -t ${{ secrets.DOCKER_USERNAME }}/worker-net:latest \
+          -f worker/Dockerfile \
+          worker # the context ( the directory that the docker daemon will work on ) 
+      - name: Pushing image to the hub
+        run: docker push ${{ secrets.DOCKER_USERNAME }}/worker-net:latest
+
+      - name: Worker deployment rollout
+        run: kubectl rollout restart deployment ${{ vars.WORKER_DEPLOYMENT_NAME }}
+          
+            
+
+
+
+
+
+
+
+
+
+
+
+      
