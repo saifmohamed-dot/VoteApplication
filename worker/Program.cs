@@ -26,7 +26,7 @@ namespace Worker
                 var definition = new { vote = "", voter_id = "" };
                 while (true)
                 {
-                    Console.WriteLine("Testing For CI/CD 1");
+                    Console.WriteLine("Testing For CI/CD 2");
                     // Slow down to prevent CPU spike, only query each 100ms
                     Thread.Sleep(100);
 
