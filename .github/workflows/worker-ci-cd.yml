@@ -28,7 +28,7 @@ jobs:
         run: docker push ${{ secrets.DOCKER_USERNAME }}/worker-net:latest
 
       - name: Worker deployment rollout
-        run: kubectl rollout restart deployment ${{ vars.WORKER_DEPLOYMENT_NAME }}
+        run: kubectl rollout restart deployment ${{ vars.WORKER_DEPLOYMENT_NAME }} -n ${{ vars.WORKER_DEPLOYMENT_NAMESPACE }}
           
             
 
