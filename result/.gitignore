@@ -1,17 +1,11 @@
 # ======================
-# Python / Flask
+# Dependencies
 # ======================
-__pycache__/
-*.py[cod]
-*.pyo
-
-# ======================
-# Virtual environments
-# ======================
-venv/
-env/
-.venv/
-ENV/
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
 
 # ======================
 # Environment variables (SECRETS)
@@ -21,11 +15,19 @@ ENV/
 !.env.example
 
 # ======================
-# Flask runtime
+# Build outputs
 # ======================
-instance/
-*.sqlite3
-*.db
+dist/
+build/
+out/
+coverage/
+
+# ======================
+# Runtime files
+# ======================
+*.pid
+*.seed
+*.pid.lock
 
 # ======================
 # Logs
@@ -34,25 +36,12 @@ logs/
 *.log
 
 # ======================
-# Test / coverage
-# ======================
-.coverage
-htmlcov/
-.pytest_cache/
-.tox/
-
-# ======================
-# Build / packaging
-# ======================
-build/
-dist/
-*.egg-info/
-
-# ======================
 # Cache
 # ======================
 .cache/
-.mypy_cache/
+.npm/
+.eslintcache
+.pnpm-store/
 
 # ======================
 # OS / Editor noise
@@ -61,3 +50,9 @@ dist/
 Thumbs.db
 .idea/
 .vscode/
+*.swp
+
+# ======================
+# Docker
+# ======================
+.dockerignore
