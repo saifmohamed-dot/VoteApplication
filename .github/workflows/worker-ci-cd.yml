@@ -1,12 +1,13 @@
 name: Worker CI/CD
 on:
-  pull_request:
+  push:
     branches:
       - main
     paths:
       - "worker/**/*.csproj"
       - "worker/**/*.cs"
       - "worker/Dockerfile"
+  workflow_dispatch:
 jobs:
   worker-build-push-deploy:
     runs-on: self-hosted
