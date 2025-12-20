@@ -1,0 +1,33 @@
+name: Worker CD
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "worker/**/*.csproj"
+      - "worker/**/*.cs"
+      - "worker/Dockerfile"
+jobs:
+  worker-deploy:
+    runs-on: self-hosted
+
+    steps:
+      # deploy on the self-hosted runner after :
+      # the CI Success.
+      # PR approved .
+      - name: Worker deployment rollout
+        run: kubectl rollout restart deployment ${{ vars.WORKER_DEPLOYMENT_NAME }} -n ${{ vars.BACKEND_NAMESPACE }}
+          
+            
+
+
+
+
+
+
+
+
+
+
+
+      
