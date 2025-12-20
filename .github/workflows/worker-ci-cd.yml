@@ -1,16 +1,15 @@
-name: Worker CI/CD
+name: Worker CI
 on:
-  push:
+  pull_request:
     branches:
       - main
     paths:
       - "worker/**/*.csproj"
       - "worker/**/*.cs"
       - "worker/Dockerfile"
-  workflow_dispatch:
 jobs:
-  worker-build-push-deploy:
-    runs-on: self-hosted
+  worker-build-push-ci:
+    runs-on: ubuntu-latest
 
     steps:
       # host runner repo clone 
@@ -27,9 +26,6 @@ jobs:
         run: docker build -t ${{ secrets.DOCKER_USERNAME }}/worker-net:latest -f worker/Dockerfile worker # the context ( the directory that the docker daemon will work on ) 
       - name: Pushing image to the hub
         run: docker push ${{ secrets.DOCKER_USERNAME }}/worker-net:latest
-
-      - name: Worker deployment rollout
-        run: kubectl rollout restart deployment ${{ vars.WORKER_DEPLOYMENT_NAME }} -n ${{ vars.BACKEND_NAMESPACE }}
           
             
 
